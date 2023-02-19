@@ -3,7 +3,7 @@ import "../scss/header.scss";
 
 const Header = () => {
   return (
-    <header className="app__header">
+    <header className="header">
       <span>SHOPLIVE</span>
       <Logo />
     </header>
