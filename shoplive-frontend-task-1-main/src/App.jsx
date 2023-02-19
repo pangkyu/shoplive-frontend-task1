@@ -23,7 +23,7 @@ const App = () => {
         <button>추가</button>
       </div>
 
-      <div>아이템 - 총 5 개</div>
+      <div>아이템 - 총 {DUMMY.length} 개</div>
 
       <div className="contents">
         {DUMMY.map((item) => (
