@@ -128,3 +128,24 @@ body {
     }
   }
 }
+
+.contents__bar {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
+  .contents__bar-itemAmount {
+  }
+  .contents__bar-search {
+    margin-left: auto;
+  }
+
+  @media (min-width: 1024px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: auto;
+    align-items: center;
+    width: 90%;
+  }
+}

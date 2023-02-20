@@ -2,6 +2,7 @@ import "./App.scss";
 import Header from "./components/Header";
 import date from "./utils/format/date";
 import Logo from "./components/Logo";
+import Search from "./components/Search";
 import { DUMMY } from "./dummies";
 import DescriptionComponent from "./DescriptionComponent";
 import { getRandomText } from "./random-text";
@@ -11,20 +12,18 @@ const App = () => {
     <div className="App">
       {/* <DescriptionComponent /> */}
       <Header />
-
-      <div>
-        <input placeholder="검색" />
-        <button>검색</button>
-      </div>
       <div>
         <input placeholder="title" />
         <input placeholder="likeCount" />
         <input placeholder="imageUrl" />
         <button>추가</button>
       </div>
-
-      <div>아이템 - 총 {DUMMY.length} 개</div>
-
+      <div className="contents__bar">
+        <div className="contents__bar-itemAmount">
+          아이템 - 총 {DUMMY.length} 개
+        </div>
+        <Search className="contents__bar-search" />
+      </div>
       <div className="contents">
         {DUMMY.map((item) => (
           <div key={item.id} className="contents__item">
