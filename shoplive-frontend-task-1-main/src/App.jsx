@@ -5,7 +5,6 @@ import Logo from "./components/Logo";
 import Search from "./components/Search";
 import { DUMMY } from "./dummies";
 import DescriptionComponent from "./DescriptionComponent";
-import { useEffect } from "react";
 
 const App = () => {
   let keys = Object.keys(localStorage);
@@ -20,10 +19,10 @@ const App = () => {
   const handleAddBtn = async () => {
     const inputTitle = document.querySelector(".title").value;
     const inputLikeCount = document.querySelector(".likeCount").value;
-    const inputImageUrl = document.querySelector(".imageUrl").value;
+    const inputImageUrl = `https://source.unsplash.com/random/?programming`;
     const inputId = Date.now();
     const inputCreatedAt = Date.now();
-    if (inputTitle && inputLikeCount && inputImageUrl !== "") {
+    if (inputTitle && inputLikeCount !== "") {
       localStorage.setItem(
         inputId,
         JSON.stringify({
@@ -50,12 +49,6 @@ const App = () => {
             placeholder="likeCount"
             type="number"
             className="likeCount"
-            required
-          />
-          <input
-            placeholder="imageUrl"
-            type="text"
-            className="imageUrl"
             required
           />
           <button onClick={handleAddBtn}>추가</button>
