@@ -4,23 +4,53 @@ import date from "./utils/format/date";
 import Logo from "./components/Logo";
 import Search from "./components/Search";
 import { DUMMY } from "./dummies";
-import localStorageSetItem from "./utils/feature/localStorageSetItem";
+// import localStorageSetItem from "./utils/feature/localStorageSetItem";
 import DescriptionComponent from "./DescriptionComponent";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
-  let keys = Object.keys(localStorage);
-  let itemArray = [];
-  for (let key of keys) {
-    // console.log(`${key} : ${localStorage.getItem(key)}`);
-    // console.log(JSON.parse(localStorage.getItem(key)));
-    itemArray.push(JSON.parse(localStorage.getItem(key)));
-  }
-  console.log(itemArray);
+  const [data, setData] = useState([]);
 
+  useEffect(() => {
+    const fetchData = Object.keys(localStorage).map((key) => {
+      return JSON.parse(localStorage.getItem(key));
+    });
+    setData(fetchData);
+  }, []);
+
+  const localStorageSetItem = async (e) => {
+    e.preventDefault();
+    const inputTitle = document.querySelector(".title").value;
+    const inputLikeCount = document.querySelector(".likeCount").value;
+    const inputImageUrl = `https://source.unsplash.com/random/?programming`;
+    const inputId = Date.now();
+    const inputCreatedAt = Date.now();
+    if (inputTitle && inputLikeCount !== "") {
+      localStorage.setItem(
+        inputId,
+        JSON.stringify({
+          id: inputId,
+          title: inputTitle,
+          createdAt: inputCreatedAt,
+          likeCount: Number(inputLikeCount),
+          imageUrl: inputImageUrl,
+        })
+      );
+      const fetchData = Object.keys(localStorage).map((key) => {
+        return JSON.parse(localStorage.getItem(key));
+      });
+      setData(fetchData);
+    } else {
+      alert("비어있는 항목이 있습니다. ");
+    }
+  };
   const removeItem = async (id) => {
-    alert("제거 버튼이 눌렸습니다");
     localStorage.removeItem(id);
+    const fetchData = Object.keys(localStorage).map((key) => {
+      return JSON.parse(localStorage.getItem(key));
+    });
+    setData(fetchData);
+    alert("제거되었습니다.");
   };
 
   return (
@@ -71,7 +101,7 @@ const App = () => {
             </div>
           </div>
         ))}
-        {itemArray.map((item) => (
+        {data.map((item) => (
           <div key={item.id} className="contents__item">
             <div className="contents__item-logo">
               <Logo />
@@ -79,7 +109,7 @@ const App = () => {
             <img
               src={item.imageUrl}
               className="contents__item-image"
-              alt="더미이미지"
+              alt="언스플래쉬랜덤이미지"
             />
             <div className="contents__item-likeCount">
               LIKE : {item.likeCount}
