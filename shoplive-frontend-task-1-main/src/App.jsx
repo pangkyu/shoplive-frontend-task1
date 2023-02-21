@@ -5,6 +5,7 @@ import Logo from "./components/Logo";
 import Search from "./components/Search";
 import { DUMMY } from "./dummies";
 import DescriptionComponent from "./DescriptionComponent";
+import { useEffect } from "react";
 
 const App = () => {
   let keys = Object.keys(localStorage);
@@ -15,6 +16,11 @@ const App = () => {
     itemArray.push(JSON.parse(localStorage.getItem(key)));
   }
   console.log(itemArray);
+
+  const removeItem = async (id) => {
+    alert("제거 버튼이 눌렸습니다");
+    localStorage.removeItem(id);
+  };
 
   const handleAddBtn = async () => {
     const inputTitle = document.querySelector(".title").value;
@@ -107,7 +113,12 @@ const App = () => {
             </div>
             <div className="contents__item-button">
               <button className="contents__item-update">수정</button>
-              <button className="contents__item-remove">제거</button>
+              <button
+                className="contents__item-remove"
+                onClick={() => removeItem(item.id)}
+              >
+                제거
+              </button>
             </div>
           </div>
         ))}
