@@ -4,6 +4,7 @@ import date from "./utils/format/date";
 import Logo from "./components/Logo";
 import Search from "./components/Search";
 import { DUMMY } from "./dummies";
+import localStorageSetItem from "./utils/feature/localStorageSetItem";
 import DescriptionComponent from "./DescriptionComponent";
 import { useEffect } from "react";
 
@@ -22,28 +23,6 @@ const App = () => {
     localStorage.removeItem(id);
   };
 
-  const handleAddBtn = async () => {
-    const inputTitle = document.querySelector(".title").value;
-    const inputLikeCount = document.querySelector(".likeCount").value;
-    const inputImageUrl = `https://source.unsplash.com/random/?programming`;
-    const inputId = Date.now();
-    const inputCreatedAt = Date.now();
-    if (inputTitle && inputLikeCount !== "") {
-      localStorage.setItem(
-        inputId,
-        JSON.stringify({
-          id: inputId,
-          title: inputTitle,
-          createdAt: inputCreatedAt,
-          likeCount: Number(inputLikeCount),
-          imageUrl: inputImageUrl,
-        })
-      );
-    } else {
-      alert("비어있는 항목이 있습니다. ");
-    }
-  };
-
   return (
     <div className="App">
       {/* <DescriptionComponent /> */}
@@ -57,7 +36,7 @@ const App = () => {
             className="likeCount"
             required
           />
-          <button onClick={handleAddBtn}>추가</button>
+          <button onClick={localStorageSetItem}>추가</button>
         </div>
       </form>
       <div className="contents__bar">
