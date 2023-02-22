@@ -5,6 +5,8 @@ import Logo from "./components/Logo";
 import Search from "./components/Search";
 import Modal from "./components/Modal";
 import { DUMMY } from "./dummies";
+import { API_URL } from "./utils/constant";
+import imageList from "./utils/data/imageList";
 import DescriptionComponent from "./DescriptionComponent";
 import { useEffect, useState } from "react";
 
@@ -24,7 +26,7 @@ const App = () => {
     e.preventDefault();
     const inputTitle = document.querySelector(".title").value;
     const inputLikeCount = document.querySelector(".likeCount").value;
-    const inputImageUrl = `https://source.unsplash.com/random/?programming`;
+    const inputImageUrl = `${API_URL}${imageList}`;
     const inputId = Date.now();
     const inputCreatedAt = Date.now();
     if (inputTitle && inputLikeCount !== "") {
