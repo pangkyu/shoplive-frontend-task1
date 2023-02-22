@@ -3,13 +3,15 @@ import Header from "./components/Header";
 import date from "./utils/format/date";
 import Logo from "./components/Logo";
 import Search from "./components/Search";
+import Modal from "./components/Modal";
 import { DUMMY } from "./dummies";
-// import localStorageSetItem from "./utils/feature/localStorageSetItem";
 import DescriptionComponent from "./DescriptionComponent";
 import { useEffect, useState } from "react";
 
 const App = () => {
   const [data, setData] = useState([]);
+  const [updateItem, setUpdateItem] = useState(false);
+  const [wantModifyData, setWantModifyData] = useState([]);
 
   useEffect(() => {
     const fetchData = Object.keys(localStorage).map((key) => {
@@ -44,6 +46,7 @@ const App = () => {
       alert("비어있는 항목이 있습니다. ");
     }
   };
+
   const removeItem = async (id) => {
     localStorage.removeItem(id);
     const fetchData = Object.keys(localStorage).map((key) => {
@@ -51,6 +54,13 @@ const App = () => {
     });
     setData(fetchData);
     alert("제거되었습니다.");
+  };
+
+  const wantModify = (title, imageUrl) => {
+    let array = [];
+    array.push(title);
+    array.push(imageUrl);
+    setWantModifyData(array);
   };
 
   return (
@@ -75,6 +85,12 @@ const App = () => {
         </div>
         <Search className="contents__bar-search" />
       </div>
+      {updateItem && (
+        <Modal
+          closeModal={() => setUpdateItem(!updateItem)}
+          wantModify={wantModifyData}
+        />
+      )}
       <div className="contents">
         {DUMMY.map((item) => (
           <div key={item.id} className="contents__item">
@@ -121,7 +137,16 @@ const App = () => {
               <div className="contents__item-title">{item.title}</div>
             </div>
             <div className="contents__item-button">
-              <button className="contents__item-update">수정</button>
+              <button
+                className="contents__item-update"
+                onClick={() => {
+                  setUpdateItem(!updateItem);
+                  wantModify(item.title, item.imageUrl);
+                }}
+              >
+                수정
+              </button>
+
               <button
                 className="contents__item-remove"
                 onClick={() => removeItem(item.id)}
