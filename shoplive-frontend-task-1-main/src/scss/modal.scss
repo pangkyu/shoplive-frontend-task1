@@ -47,7 +47,7 @@
     display: flex;
     flex-direction: row;
     justify-content: right;
-    margin-top: 60%;
+    margin-top: 1rem;
 
     .modal__confirm-cancel,
     .modal__confirm-save {
@@ -55,6 +55,7 @@
       border-radius: 1rem;
       width: 3.5rem;
     }
+
     div:hover {
       cursor: pointer;
     }

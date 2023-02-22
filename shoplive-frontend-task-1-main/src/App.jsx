@@ -6,7 +6,7 @@ import Search from "./components/Search";
 import Modal from "./components/Modal";
 import { DUMMY } from "./dummies";
 import { API_URL } from "./utils/constant";
-import imageList from "./utils/data/imageList";
+import { imageList } from "./utils/data/imageList";
 import DescriptionComponent from "./DescriptionComponent";
 import { useEffect, useState } from "react";
 
@@ -58,16 +58,14 @@ const App = () => {
     alert("제거되었습니다.");
   };
 
-  const wantModify = (title, imageUrl) => {
-    let array = [];
-    array.push(title);
-    array.push(imageUrl);
+  const wantModify = (title, id, image) => {
+    let array = [title, id, image];
     setWantModifyData(array);
   };
 
   return (
     <div className="App">
-      {/* <DescriptionComponent /> */}
+      <DescriptionComponent />
       <Header />
       <form className="contents-form">
         <div className="contents__addBar">
@@ -91,6 +89,7 @@ const App = () => {
         <Modal
           closeModal={() => setUpdateItem(!updateItem)}
           wantModify={wantModifyData}
+          setData={setData}
         />
       )}
       <div className="contents">
@@ -143,7 +142,7 @@ const App = () => {
                 className="contents__item-update"
                 onClick={() => {
                   setUpdateItem(!updateItem);
-                  wantModify(item.title, item.imageUrl);
+                  wantModify(item.title, item.id, item.imageUrl);
                 }}
               >
                 수정
