@@ -3,7 +3,7 @@
   top: 50%;
   left: 50%;
   width: 50%;
-  height: 70%;
+  height: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,6 +27,37 @@
     width: 100%;
     justify-content: center;
     margin-top: 1.5rem;
+  }
+
+  .modal__content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    input {
+      border: 1px solid black;
+      width: 50%;
+    }
+  }
+
+  .modal__confirm {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-top: 60%;
+
+    .modal__confirm-cancel,
+    .modal__confirm-save {
+      background-color: #808080;
+      border-radius: 1rem;
+      width: 3.5rem;
+    }
+    div:hover {
+      cursor: pointer;
+    }
   }
 }
 
