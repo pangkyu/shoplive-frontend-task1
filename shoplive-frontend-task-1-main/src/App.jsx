@@ -14,6 +14,7 @@ const App = () => {
   const [data, setData] = useState([]);
   const [updateItem, setUpdateItem] = useState(false);
   const [wantModifyData, setWantModifyData] = useState([]);
+  const [searchItem, setSearchItem] = useState([]);
 
   useEffect(() => {
     const fetchData = Object.keys(localStorage).map((key) => {
@@ -59,13 +60,14 @@ const App = () => {
   };
 
   const wantModify = (title, id, image) => {
-    let array = [title, id, image];
-    setWantModifyData(array);
+    let testA = [title, id, image];
+    setWantModifyData(testA);
   };
 
+  console.log(searchItem.length);
   return (
     <div className="App">
-      <DescriptionComponent />
+      {/* <DescriptionComponent /> */}
       <Header />
       <form className="contents-form">
         <div className="contents__addBar">
@@ -83,7 +85,11 @@ const App = () => {
         <div className="contents__bar-itemAmount">
           아이템 - 총 {DUMMY.length + window.localStorage.length} 개
         </div>
-        <Search className="contents__bar-search" />
+        <Search
+          className="contents__bar-search"
+          data={data}
+          setSearchItem={setSearchItem}
+        />
       </div>
       {updateItem && (
         <Modal
@@ -93,70 +99,118 @@ const App = () => {
         />
       )}
       <div className="contents">
-        {DUMMY.map((item) => (
-          <div key={item.id} className="contents__item">
-            <div className="contents__item-logo">
-              <Logo />
-            </div>
-            <img
-              src={item.imageUrl}
-              className="contents__item-image"
-              alt="더미이미지"
-            />
-            <div className="contents__item-likeCount">
-              LIKE : {item.likeCount}
-            </div>
-            <div className="contents__item-TextBox">
-              <div className="contents__item-createdAt">
-                {date(item.createdAt)}
+        {/* {searchItem.length == 0 ? (
+          DUMMY.map((item) => (
+            <div key={item.id} className="contents__item">
+              <div className="contents__item-logo">
+                <Logo />
               </div>
-              <div className="contents__item-title">{item.title}</div>
-            </div>
-            <div className="contents__item-button">
-              <button className="contents__item-update">수정</button>
-              <button className="contents__item-remove">제거</button>
-            </div>
-          </div>
-        ))}
-        {data.map((item) => (
-          <div key={item.id} className="contents__item">
-            <div className="contents__item-logo">
-              <Logo />
-            </div>
-            <img
-              src={item.imageUrl}
-              className="contents__item-image"
-              alt="언스플래쉬랜덤이미지"
-            />
-            <div className="contents__item-likeCount">
-              LIKE : {item.likeCount}
-            </div>
-            <div className="contents__item-TextBox">
-              <div className="contents__item-createdAt">
-                {date(item.createdAt)}
+              <img
+                src={item.imageUrl}
+                className="contents__item-image"
+                alt="더미이미지"
+              />
+              <div className="contents__item-likeCount">
+                LIKE : {item.likeCount}
               </div>
-              <div className="contents__item-title">{item.title}</div>
+              <div className="contents__item-TextBox">
+                <div className="contents__item-createdAt">
+                  {date(item.createdAt)}
+                </div>
+                <div className="contents__item-title">{item.title}</div>
+              </div>
+              <div className="contents__item-button">
+                <button className="contents__item-update">수정</button>
+                <button className="contents__item-remove">제거</button>
+              </div>
             </div>
-            <div className="contents__item-button">
-              <button
-                className="contents__item-update"
-                onClick={() => {
-                  setUpdateItem(!updateItem);
-                  wantModify(item.title, item.id, item.imageUrl);
-                }}
-              >
-                수정
-              </button>
+          ))
+        ) : (
+          <div></div>
+        )} */}
+        {searchItem.length == 0 ? (
+          data.map((item) => (
+            <div key={item.id} className="contents__item">
+              <div className="contents__item-logo">
+                <Logo />
+              </div>
+              <img
+                src={item.imageUrl}
+                className="contents__item-image"
+                alt="언스플래쉬랜덤이미지"
+              />
+              <div className="contents__item-likeCount">
+                LIKE : {item.likeCount}
+              </div>
+              <div className="contents__item-TextBox">
+                <div className="contents__item-createdAt">
+                  {date(item.createdAt)}
+                </div>
+                <div className="contents__item-title">{item.title}</div>
+              </div>
+              <div className="contents__item-button">
+                <button
+                  className="contents__item-update"
+                  onClick={() => {
+                    setUpdateItem(!updateItem);
+                    wantModify(item.title, item.id, item.imageUrl);
+                  }}
+                >
+                  수정
+                </button>
 
-              <button
-                className="contents__item-remove"
-                onClick={() => removeItem(item.id)}
-              >
-                제거
-              </button>
+                <button
+                  className="contents__item-remove"
+                  onClick={() => removeItem(item.id)}
+                >
+                  제거
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <div></div>
+        )}
+        {searchItem &&
+          searchItem.map((item) => (
+            <div key={item.id} className="contents__item">
+              <div className="contents__item-logo">
+                <Logo />
+              </div>
+              <img
+                src={item.imageUrl}
+                className="contents__item-image"
+                alt="언스플래쉬랜덤이미지"
+              />
+              <div className="contents__item-likeCount">
+                LIKE : {item.likeCount}
+              </div>
+              <div className="contents__item-TextBox">
+                <div className="contents__item-createdAt">
+                  {date(item.createdAt)}
+                </div>
+                <div className="contents__item-title">{item.title}</div>
+              </div>
+              <div className="contents__item-button">
+                <button
+                  className="contents__item-update"
+                  onClick={() => {
+                    setUpdateItem(!updateItem);
+                    wantModify(item.title, item.id, item.imageUrl);
+                  }}
+                >
+                  수정
+                </button>
+
+                <button
+                  className="contents__item-remove"
+                  onClick={() => removeItem(item.id)}
+                >
+                  제거
+                </button>
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   );

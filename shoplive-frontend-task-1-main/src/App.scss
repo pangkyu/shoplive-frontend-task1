@@ -137,6 +137,11 @@ body {
 
   .searchBar {
     margin-left: auto;
+
+    .searchBar-all {
+      text-align: right;
+      margin-bottom: 0.7rem;
+    }
   }
 
   @media (min-width: 1024px) {
