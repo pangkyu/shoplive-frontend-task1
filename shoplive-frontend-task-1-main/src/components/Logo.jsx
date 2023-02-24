@@ -1,9 +1,19 @@
 import "../scss/logo.scss";
-// import { getRandomText } from "../random-text";
+import { getRandomText } from "../utils/data/random-text";
+import useInterval from "../useInterval";
+import { useState } from "react";
 
 const Logo = () => {
-  //   console.log(getRandomText);
-  return <span className="logo">ABCDEFGH</span>;
-  // return <span className="logo">{getRandomText}</span>;
+  const [text, setText] = useState([]);
+  useInterval(() => {
+    getRandomText()
+      .then((result) => {
+        console.log(result);
+        setText(result);
+      })
+      .catch((err) => console.error(err));
+  }, 3000);
+
+  return <span className="logo">{text}</span>;
 };
 export default Logo;
