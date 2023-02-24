@@ -1,6 +1,6 @@
 import { useState } from "react";
 import queryString from "querystring";
-import { Link, useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 const Search = (props) => {
   const [query, setQuery] = useState("");
@@ -35,7 +35,6 @@ const Search = (props) => {
     const fetchData = array.map((item) => {
       return JSON.parse(localStorage.getItem(item));
     });
-    console.log(fetchData);
 
     props.setSearchItem(fetchData);
   };
