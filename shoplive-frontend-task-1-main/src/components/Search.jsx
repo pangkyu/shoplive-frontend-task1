@@ -1,6 +1,6 @@
 import { useState } from "react";
 import queryString from "querystring";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useNavigate } from "react-router-dom";
 
 const Search = (props) => {
   const [query, setQuery] = useState("");
@@ -8,6 +8,12 @@ const Search = (props) => {
 
   const handleInputChange = (e) => {
     setQuery(e.target.value);
+  };
+
+  const handleOnKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearchSubmit(e);
+    }
   };
 
   const handleSearchSubmit = async (e) => {
@@ -35,7 +41,8 @@ const Search = (props) => {
 
   const ViewAllItems = async (e) => {
     e.preventDefault();
-    props.setSearchItem();
+    console.log(props.data);
+    // props.setSearchItem();
   };
 
   return (
@@ -48,11 +55,9 @@ const Search = (props) => {
         type="text"
         value={query}
         onChange={handleInputChange}
+        onKeyPress={handleOnKeyPress}
       />
       <button onClick={handleSearchSubmit}>검색</button>
-      {/* <Link to="/keyword?" onClick={handleSearchSubmit}>
-        검색
-      </Link> */}
     </div>
   );
 };
