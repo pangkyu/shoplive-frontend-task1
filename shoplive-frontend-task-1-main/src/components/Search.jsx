@@ -18,6 +18,7 @@ const Search = (props) => {
     let array = [];
     props.data.map((item) => {
       const test = item.title.match(query);
+      console.log(test);
 
       if (test !== null) {
         if (item.title === test.input) {
