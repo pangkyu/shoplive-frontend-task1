@@ -62,8 +62,8 @@ const Content = () => {
     setWantModifyData(testA);
   };
 
-  console.log(searchItem.length);
-  console.log(searchItem);
+  //   console.log(searchItem.length);
+  //   console.log(searchItem);
   return (
     <div className="App">
       <form className="contents-form">

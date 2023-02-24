@@ -1,8 +1,10 @@
 import { useState } from "react";
 import queryString from "querystring";
+import { Link, useSearchParams } from "react-router-dom";
 
 const Search = (props) => {
   const [query, setQuery] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleInputChange = (e) => {
     setQuery(e.target.value);
@@ -12,16 +14,14 @@ const Search = (props) => {
     e.preventDefault();
     const parsed = queryString.parse(window.location.search);
     const newQueryString = queryString.stringify({ keyword: query });
-    const url = window.location.pathname + "?" + newQueryString;
-    // window.location.href = url;
+    setSearchParams(newQueryString);
 
     let array = [];
     props.data.map((item) => {
-      const test = item.title.match(query);
-      console.log(test);
+      const matchItem = item.title.match(query);
 
-      if (test !== null) {
-        if (item.title === test.input) {
+      if (matchItem !== null) {
+        if (item.title === matchItem.input) {
           array.push(item.id);
         }
       }
@@ -50,6 +50,9 @@ const Search = (props) => {
         onChange={handleInputChange}
       />
       <button onClick={handleSearchSubmit}>검색</button>
+      {/* <Link to="/keyword?" onClick={handleSearchSubmit}>
+        검색
+      </Link> */}
     </div>
   );
 };
