@@ -4,11 +4,11 @@ import useInterval from "../useInterval";
 import { useState } from "react";
 
 const Logo = () => {
-  const [text, setText] = useState([]);
+  const [text, setText] = useState("ABCDEFGH");
+
   useInterval(() => {
     getRandomText()
       .then((result) => {
-        console.log(result);
         setText(result);
       })
       .catch((err) => console.error(err));

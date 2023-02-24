@@ -43,6 +43,7 @@ const Search = (props) => {
   const ViewAllItems = async (e) => {
     e.preventDefault();
     props.setSearchItem(props.data);
+    setSearchParams("");
   };
 
   return (

@@ -58,11 +58,9 @@ const Content = () => {
   };
 
   const wantModify = (title, id, image) => {
-    let testA = [title, id, image];
-    setWantModifyData(testA);
+    let wantData = [title, id, image];
+    setWantModifyData(wantData);
   };
-
-  console.log(searchItem);
 
   return (
     <div className="App">
