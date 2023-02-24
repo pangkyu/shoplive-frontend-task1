@@ -36,13 +36,13 @@ const Search = (props) => {
       return JSON.parse(localStorage.getItem(item));
     });
     console.log(fetchData);
+
     props.setSearchItem(fetchData);
   };
 
   const ViewAllItems = async (e) => {
     e.preventDefault();
-    console.log(props.data);
-    // props.setSearchItem();
+    props.setSearchItem(props.data);
   };
 
   return (
@@ -53,7 +53,6 @@ const Search = (props) => {
       <input
         placeholder="검색"
         type="text"
-        value={query}
         onChange={handleInputChange}
         onKeyPress={handleOnKeyPress}
       />

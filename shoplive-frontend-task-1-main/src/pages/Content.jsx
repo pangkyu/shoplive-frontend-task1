@@ -62,8 +62,8 @@ const Content = () => {
     setWantModifyData(testA);
   };
 
-  //   console.log(searchItem.length);
-  //   console.log(searchItem);
+  console.log(searchItem);
+
   return (
     <div className="App">
       <form className="contents-form">
@@ -130,7 +130,7 @@ const Content = () => {
         ) : (
           <div></div>
         )} */}
-        {searchItem.length == 0
+        {searchItem.length === 0
           ? data.map((item) => (
               <div key={item.id} className="contents__item">
                 <div className="contents__item-logo">
@@ -160,7 +160,6 @@ const Content = () => {
                   >
                     수정
                   </button>
-
                   <button
                     className="contents__item-remove"
                     onClick={() => removeItem(item.id)}
@@ -170,8 +169,7 @@ const Content = () => {
                 </div>
               </div>
             ))
-          : searchItem &&
-            searchItem.map((item) => (
+          : searchItem.map((item) => (
               <div key={item.id} className="contents__item">
                 <div className="contents__item-logo">
                   <Logo />
